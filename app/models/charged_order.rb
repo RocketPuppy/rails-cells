@@ -11,6 +11,13 @@ class ChargedOrder < ActiveRecord::Base
 
   white_list :id, :product, :price_cents, :charge_code, :created_at
 
+  def refund!(amount)
+    o = becomes(RefundedOrder)
+    o.refunded_cents = amount
+    o.save!
+    o
+  end
+
   def cell
     :charged_order
   end

@@ -16,4 +16,10 @@ class OrderController < ApplicationController
 
     render locals: { order: order.charge! }
   end
+
+  def refund
+    order = ChargedOrder.find(params[:id])
+
+    render locals: { order: order.refund!(params[:amount]) }
+  end
 end
