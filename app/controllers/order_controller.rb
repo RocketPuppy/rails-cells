@@ -10,4 +10,10 @@ class OrderController < ApplicationController
 
     render locals: { order: order }
   end
+
+  def charge
+    order = PlacedOrder.find(params[:id])
+
+    render locals: { order: order.charge! }
+  end
 end
