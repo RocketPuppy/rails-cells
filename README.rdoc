@@ -1,9 +1,0 @@
-== README
-
-should be normal rails setup
-
-This is to demonstrate some ideas I had with using polymorphism instead of if/then/else to perform conditional behavior. It also served as a platform for me to experiment with the `cells` gem.
-
-Have a look at the models. There's a base Order, which is an AR model, but with find overridden to give one of the other types of order (Placed, Charged, Refunded) if necessary. Each model implements `cell` which returns the name of cell to use when rendering it.
-
-The sole controller doesn't do any branching, it simply fetches an order and renders it. There's also no branching in the views (app/cells/).
