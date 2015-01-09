@@ -7,33 +7,61 @@ module OptionalAttributes
     def optional(*args)
       args.each do |field|
         self.send(:define_method, field) do
-          Optional.new(read_attribute(field))
+          val = read_attribute(field)
+
+          if val.nil?
+            Optional.nothing
+          else
+            Optional.just(val)
+          end
         end
       end
     end
   end
 end
 
-class Optional
-  def initialize(val)
-    @val = val
+module Optional
+  def self.just(val)
+    Just.new(val)
   end
 
-  def map
-    if val
-      yield(val)
-    end
-  end
-
-  def map_or(x)
-    if val
-      yield(val)
-    else
-      x
-    end
+  def self.nothing
+    Nothing.instance
   end
 
   private
+
+  class Just
+    def initialize(val)
+      @val = val
+    end
+
+    def map
+      yield(val)
+    end
+
+    def map_or(_)
+      yield(val)
+    end
+
+    private
+
+    attr_reader :val
+  end
+
+  class Nothing
+    def self.instance
+      @nothing ||= new
+    end
+
+    def map
+      self
+    end
+
+    def map_or(x)
+      x
+    end
+  end
 
   attr_reader :val
 end
