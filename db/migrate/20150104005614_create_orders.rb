@@ -5,7 +5,7 @@ class CreateOrders < ActiveRecord::Migration
       t.string :product
       t.integer :price_cents
       t.integer :refunded_cents
-      t.integer :charge_code
+      t.string :charge_code
       t.timestamps
     end
   end

@@ -17,7 +17,7 @@ ActiveRecord::Schema.define(version: 20150104005614) do
     t.string   "product"
     t.integer  "price_cents"
     t.integer  "refunded_cents"
-    t.integer  "charge_code"
+    t.string   "charge_code"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
