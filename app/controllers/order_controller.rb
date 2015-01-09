@@ -4,4 +4,10 @@ class OrderController < ApplicationController
 
     render locals: { order: order }
   end
+
+  def place
+    order = PlacedOrder.create!(params[:order])
+
+    render locals: { order: order }
+  end
 end
